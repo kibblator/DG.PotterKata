@@ -1,14 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace DG.PotterKata
 {
     public class Basket
     {
-        public decimal CalcCost(List<Book> book)
+        public decimal CalcCost(List<Book> books)
         {
             const decimal bookCost = 8m;
-            return book.Count * bookCost;
+            var subTotal = books.Count * bookCost;
+
+            if (books.GroupBy(b => b.BookId).Count() > 1)
+            {
+                subTotal *= 0.95m;
+            }
+
+            return subTotal;
         }
     }
 
