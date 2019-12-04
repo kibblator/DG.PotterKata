@@ -1,13 +1,23 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace DG.PotterKata
 {
     public class Basket
     {
-        public decimal CalcCost(int quantity)
+        public decimal CalcCost(List<Book> book)
         {
-            var bookCost = 8m;
-            return quantity * bookCost;
+            const decimal bookCost = 8m;
+            return book.Count * bookCost;
         }
+    }
+
+    public class Book
+    {
+        public Book(int bookId)
+        {
+            BookId = bookId;
+        }
+        public int BookId { get; private set; }
     }
 }
