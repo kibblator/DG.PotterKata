@@ -4,15 +4,25 @@ namespace DG.PotterKata.Tests
 {
     public class Tests
     {
+        private Basket _basket;
+
         [SetUp]
         public void Setup()
         {
+            _basket = new Basket();
         }
 
         [Test]
-        public void Test1()
+        public void OneBook_NoDiscount_Costs8Euros()
         {
-            Assert.Pass();
+            //Arrange
+            var quantity = 1;
+
+            //Act
+            var cost = _basket.CalcCost(quantity);
+
+            //Assert
+            Assert.That(cost, Is.EqualTo(8));
         }
     }
 }
