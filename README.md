@@ -21,7 +21,7 @@ For example, how much does this basket of books cost?
 
 answer :
 
- `(4 \* 8) - 20% [first book, second book, third book, fourth book]
-+ (4 \* 8) - 20% [first book, second book, third book, fifth book]
+```(4 \* 8) - 20% [first book, second book, third book, fourth book] 
+ + (4 \* 8) - 20% [first book, second book, third book, fifth book]
 = 25.6 \* 2
-= 51.20`
+= 51.20```
