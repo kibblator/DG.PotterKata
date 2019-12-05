@@ -8,35 +8,9 @@ namespace DG.PotterKata.Services
     {
         public decimal CalcCost(List<Book> books)
         {
-            var bundles = CreateBundles(books);
+            var bundles = BookBundlerService.CreateBundles(books);
 
             return bundles.Sum(CalcBundleCostWithDiscount);
-        }
-
-        private static IEnumerable<BookBundle> CreateBundles(IEnumerable<Book> books)
-        {
-            var bundles = new List<BookBundle>();
-            foreach (var book in books)
-            {
-                var bundleMissingBook = FindBundleMissingBook(bundles, book);
-
-                if (bundleMissingBook == null)
-                {
-                    bundles.Add(BookBundle.CreateNewBundleWithBook(book));
-                }
-                else
-                {
-                    bundleMissingBook.Books.Add(book);
-                }
-            }
-
-            return bundles;
-        }
-
-        private static BookBundle FindBundleMissingBook(IEnumerable<BookBundle> bundles, Book book)
-        {
-            return bundles.FirstOrDefault(b => b.Books
-                                                   .Any(bk => bk.BookId == book.BookId) == false);
         }
 
         private static decimal CalcBundleCostWithDiscount(BookBundle bookBundle)
