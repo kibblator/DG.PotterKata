@@ -28,8 +28,7 @@ namespace DG.PotterKata.Services
 
         private static BookBundle FindBundleMissingBook(IEnumerable<BookBundle> bundles, Book book)
         {
-            return bundles.FirstOrDefault(b => b.Books
-                                                   .Any(bk => bk.BookId == book.BookId) == false);
+            return bundles.FirstOrDefault(b => b.Books.Any(bk => bk.BookId == book.BookId) == false);
         }
     }
 }

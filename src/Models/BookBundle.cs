@@ -11,10 +11,7 @@ namespace DG.PotterKata.Models
 
         public static BookBundle CreateNewBundleWithBook(Book book)
         {
-            return new BookBundle(new List<Book>
-            {
-                book
-            });
+            return new BookBundle(new List<Book>{book});
         }
 
         public List<Book> Books { get; private set; }

@@ -130,6 +130,7 @@ namespace DG.PotterKata.Tests
 
         [Test]
         [TestCase(new[] { 1, 1, 1, 2, 2 }, 38.40)]
+        [TestCase(new[] { 1, 1, 2, 2, 3, 3, 4, 5 }, 51.20)]
         public void CalculateSpecificBundles_ReturnsCorrectAmounts(int[] bookIds, double expectedCost)
         {
             //Arrange
