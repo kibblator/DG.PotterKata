@@ -8,11 +8,9 @@ namespace DG.PotterKata.Services
     {
         public decimal CalcCost(List<Book> books)
         {
-            const decimal bookCost = 8m;
-
             var bundles = CreateBundles(books);
 
-            return bundles.Sum(bookBundle => CalcBundleCostWithDiscount(bookCost, bookBundle));
+            return bundles.Sum(CalcBundleCostWithDiscount);
         }
 
         private static IEnumerable<BookBundle> CreateBundles(IEnumerable<Book> books)
@@ -41,14 +39,14 @@ namespace DG.PotterKata.Services
                                                    .Any(bk => bk.BookId == book.BookId) == false);
         }
 
-        private static decimal CalcBundleCostWithDiscount(decimal bookCost, BookBundle bookBundle)
+        private static decimal CalcBundleCostWithDiscount(BookBundle bookBundle)
         {
-            return CalcBaseCost(bookCost, bookBundle.Books.Count) * DiscountService.GetDiscount(bookBundle);
+            return CalcBaseCost(bookBundle.Books) * DiscountService.GetDiscount(bookBundle);
         }
 
-        private static decimal CalcBaseCost(decimal bookCost, int quantity)
+        private static decimal CalcBaseCost(IEnumerable<Book> books)
         {
-            return bookCost * quantity;
+            return books.Sum(b => b.BookCost);
         }
     }
 }
