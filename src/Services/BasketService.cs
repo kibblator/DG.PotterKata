@@ -26,6 +26,14 @@ namespace DG.PotterKata.Services
             {
                 subTotal *= 0.9m;
             }
+            else if (books.GroupBy(b => b.BookId).Count() == 4)
+            {
+                subTotal *= 0.8m;
+            }
+            else if (books.GroupBy(b => b.BookId).Count() == 5)
+            {
+                subTotal *= 0.75m;
+            }
 
             return subTotal;
         }

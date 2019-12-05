@@ -85,5 +85,46 @@ namespace DG.PotterKata.Tests
             //Assert
             Assert.That(cost, Is.EqualTo(21.60));
         }
+
+        [Test]
+        public void FourDifferentBooks_Gives20PercentDiscount()
+        {
+            //Arrange
+            _basketService = new BasketService();
+            var books = new List<Book>
+            {
+                new Book(1),
+                new Book(2),
+                new Book(3),
+                new Book(4)
+            };
+
+            //Act
+            var cost = _basketService.CalcCost(books);
+
+            //Assert
+            Assert.That(cost, Is.EqualTo(25.60));
+        }
+
+        [Test]
+        public void FiveDifferentBooks_Gives25PercentDiscount()
+        {
+            //Arrange
+            _basketService = new BasketService();
+            var books = new List<Book>
+            {
+                new Book(1),
+                new Book(2),
+                new Book(3),
+                new Book(4),
+                new Book(5)
+            };
+
+            //Act
+            var cost = _basketService.CalcCost(books);
+
+            //Assert
+            Assert.That(cost, Is.EqualTo(30));
+        }
     }
 }
