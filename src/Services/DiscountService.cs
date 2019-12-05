@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using DG.PotterKata.Models;
 
 namespace DG.PotterKata.Services
 {
@@ -15,11 +13,9 @@ namespace DG.PotterKata.Services
             {5, 0.75m}
         };
 
-        public static decimal CalcDiscount(IEnumerable<Book> books, decimal subTotal)
+        public static decimal CalcDiscount(BasketService.BookBundle bundle)
         {
-            var total = subTotal * DiscountAmounts[books.GroupBy(b => b.BookId).Count()];
-
-            return total;
+            return DiscountAmounts[bundle.Books.Count];
         }
     }
 }

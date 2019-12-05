@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using DG.PotterKata.Models;
 using DG.PotterKata.Services;
 using NUnit.Framework;
@@ -125,6 +126,21 @@ namespace DG.PotterKata.Tests
 
             //Assert
             Assert.That(cost, Is.EqualTo(30));
+        }
+
+        [Test]
+        [TestCase(new[] { 1, 1, 1, 2, 2 }, 38.40)]
+        public void CalculateSpecificBundles_ReturnsCorrectAmounts(int[] bookIds, double expectedCost)
+        {
+            //Arrange
+            _basketService = new BasketService();
+            var books = bookIds.Select(bookId => new Book(bookId)).ToList();
+
+            //Act
+            var cost = _basketService.CalcCost(books);
+
+            //Assert
+            Assert.That(cost, Is.EqualTo(expectedCost));
         }
     }
 }
