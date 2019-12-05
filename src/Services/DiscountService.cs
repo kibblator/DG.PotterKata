@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using DG.PotterKata.Models;
 
 namespace DG.PotterKata.Services
 {
@@ -13,7 +14,7 @@ namespace DG.PotterKata.Services
             {5, 0.75m}
         };
 
-        public static decimal CalcDiscount(BasketService.BookBundle bundle)
+        public static decimal GetDiscount(BookBundle bundle)
         {
             return DiscountAmounts[bundle.Books.Count];
         }

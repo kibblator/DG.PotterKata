@@ -6,42 +6,25 @@ namespace DG.PotterKata.Services
 {
     public class BasketService
     {
-        public class BookBundle
-        {
-            public List<Book> Books { get; set; }
-        }
-
         public decimal CalcCost(List<Book> books)
         {
             const decimal bookCost = 8m;
-            var total = 0m;
 
             var bundles = CreateBundles(books);
-            foreach (var bookBundle in bundles)
-            {
-                total += bookCost * bookBundle.Books.Count * DiscountService.CalcDiscount(bookBundle);
-            }
 
-            return total;
+            return bundles.Sum(bookBundle => CalcBundleCostWithDiscount(bookCost, bookBundle));
         }
 
-        private IEnumerable<BookBundle> CreateBundles(IEnumerable<Book> books)
+        private static IEnumerable<BookBundle> CreateBundles(IEnumerable<Book> books)
         {
             var bundles = new List<BookBundle>();
             foreach (var book in books)
             {
-                var bundleMissingBook = bundles.FirstOrDefault(b => b.Books
-                    .Any(bk => bk.BookId == book.BookId) == false);
+                var bundleMissingBook = FindBundleMissingBook(bundles, book);
 
                 if (bundleMissingBook == null)
                 {
-                    bundles.Add(new BookBundle
-                    {
-                        Books = new List<Book>
-                        {
-                            book
-                        }
-                    });
+                    bundles.Add(BookBundle.CreateNewBundleWithBook(book));
                 }
                 else
                 {
@@ -50,6 +33,22 @@ namespace DG.PotterKata.Services
             }
 
             return bundles;
+        }
+
+        private static BookBundle FindBundleMissingBook(IEnumerable<BookBundle> bundles, Book book)
+        {
+            return bundles.FirstOrDefault(b => b.Books
+                                                   .Any(bk => bk.BookId == book.BookId) == false);
+        }
+
+        private static decimal CalcBundleCostWithDiscount(decimal bookCost, BookBundle bookBundle)
+        {
+            return CalcBaseCost(bookCost, bookBundle.Books.Count) * DiscountService.GetDiscount(bookBundle);
+        }
+
+        private static decimal CalcBaseCost(decimal bookCost, int quantity)
+        {
+            return bookCost * quantity;
         }
     }
 }
