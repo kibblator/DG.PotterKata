@@ -8,9 +8,15 @@ namespace DG.PotterKata.Services
     {
         public decimal CalcCost(List<Book> books)
         {
-            var bundles = BookBundlerService.CreateBundles(books);
+            var balancedBundles = BookBundlerService.CreateBundles(books, true).ToList();
+            var unbalancedBundles = BookBundlerService.CreateBundles(books, false).ToList();
 
-            return bundles.Sum(bu => BundleCostService.CalcBundleCostWithDiscount(bu));
+            var balancedDiscount = balancedBundles.Sum(bb => DiscountService.GetDiscount(bb.Books.Count));
+            var unbalancedDiscount = unbalancedBundles.Sum(ub => DiscountService.GetDiscount(ub.Books.Count));
+
+            var selectedBundle = balancedDiscount < unbalancedDiscount ? balancedBundles : unbalancedBundles;
+
+            return selectedBundle.Sum(bu => BundleCostService.CalcBundleCostWithDiscount(bu));
         }
     }
 }
