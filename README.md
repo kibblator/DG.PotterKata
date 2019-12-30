@@ -22,9 +22,9 @@ For example, how much does this basket of books cost?
 answer :
 
 ```
-(4 \* 8) - 20% [first book, second book, third book, fourth book] 
- + (4 \* 8) - 20% [first book, second book, third book, fifth book]
-= 25.6 \* 2
+(4 * 8) - 20% [first book, second book, third book, fourth book] 
+ + (4 * 8) - 20% [first book, second book, third book, fifth book]
+= 25.6 * 2
 = 51.20
 ```
 
@@ -35,8 +35,8 @@ There is an additonal scenario that doesn't follow the previous solution to get 
 - 1 copy of the third book
 
 ```
-(3 \* 8) - 10% [first book, second book, third book] 
- + (1 \* 8) [first book]
+(3 * 8) - 10% [first book, second book, third book] 
+ + (1 * 8) [first book]
 = 21.6 + 8
 = 29.60
 ```
