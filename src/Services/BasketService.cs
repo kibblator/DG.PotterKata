@@ -10,17 +10,7 @@ namespace DG.PotterKata.Services
         {
             var bundles = BookBundlerService.CreateBundles(books);
 
-            return bundles.Sum(bu => CalcBundleCostWithDiscount(bu));
-        }
-
-        private static decimal CalcBundleCostWithDiscount(BookBundle bookBundle)
-        {
-            return CalcBaseCost(bookBundle.Books) * DiscountService.GetDiscount(bookBundle.Books.Count);
-        }
-
-        private static decimal CalcBaseCost(IEnumerable<Book> books)
-        {
-            return books.Sum(b => b.BookCost);
+            return bundles.Sum(bu => BundleCostService.CalcBundleCostWithDiscount(bu));
         }
     }
 }
