@@ -27,3 +27,16 @@ answer :
 = 25.6 \* 2
 = 51.20
 ```
+
+### Edit:
+There is an additonal scenario that doesn't follow the previous solution to get the maximum amount of discount required:
+- 2 copies of the first book
+- 1 copy of the second book
+- 1 copy of the third book
+
+```
+(3 \* 8) - 10% [first book, second book, third book] 
+ + (1 \* 8) [first book]
+= 21.6 + 8
+= 29.60
+```
